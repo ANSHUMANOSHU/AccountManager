@@ -1,4 +1,4 @@
-package com.example.accountmanager;
+package com.example.accountmanager.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.accountmanager.Entity.FalseLogger;
+import com.example.accountmanager.R;
+import com.example.accountmanager.entity.FalseLogger;
 
 import java.util.ArrayList;
 

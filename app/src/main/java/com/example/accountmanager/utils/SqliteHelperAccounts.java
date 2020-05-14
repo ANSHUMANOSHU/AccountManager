@@ -1,10 +1,12 @@
-package com.example.accountmanager.Entity;
+package com.example.accountmanager.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.accountmanager.entity.Account;
 
 import androidx.annotation.Nullable;
 
@@ -52,7 +54,7 @@ public class SqliteHelperAccounts extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertAccountInfo(EntityAccount account) {
+    public boolean insertAccountInfo(Account account) {
         SQLiteDatabase database = this.getWritableDatabase();
         try {
             ContentValues values = new ContentValues();
@@ -71,7 +73,7 @@ public class SqliteHelperAccounts extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean updateAccountInfo(EntityAccount account){
+    public boolean updateAccountInfo(Account account){
         SQLiteDatabase database = this.getWritableDatabase();
         try {
             ContentValues values = new ContentValues();
@@ -91,15 +93,15 @@ public class SqliteHelperAccounts extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<EntityAccount> fetchAccounts() {
-        ArrayList<EntityAccount> accounts = new ArrayList<>();
+    public ArrayList<Account> fetchAccounts() {
+        ArrayList<Account> accounts = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
         try {
             Cursor cursor = database.rawQuery("Select * from " + TABLE_NAME , null);
 
             if (cursor != null) {
                 while (cursor.moveToNext()) {
-                    EntityAccount account = new EntityAccount( cursor.getString(cursor.getColumnIndex(COLUMN_2))
+                    Account account = new Account( cursor.getString(cursor.getColumnIndex(COLUMN_2))
                             , cursor.getString(cursor.getColumnIndex(COLUMN_1))
                             , cursor.getString(cursor.getColumnIndex(COLUMN_4))
                             , cursor.getString(cursor.getColumnIndex(COLUMN_5))
@@ -114,7 +116,7 @@ public class SqliteHelperAccounts extends SQLiteOpenHelper {
     }
 
 
-    public boolean deleteAccountInfo(EntityAccount account) {
+    public boolean deleteAccountInfo(Account account) {
 
         SQLiteDatabase database = this.getWritableDatabase();
         try {

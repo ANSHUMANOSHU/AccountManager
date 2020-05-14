@@ -15,7 +15,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.accountmanager.Entity.FalseLogger;
+import com.example.accountmanager.adapters.LogAttemptsAdapter;
+import com.example.accountmanager.entity.FalseLogger;
 
 import java.io.File;
 import java.util.ArrayList;

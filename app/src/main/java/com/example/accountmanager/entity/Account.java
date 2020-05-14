@@ -1,6 +1,6 @@
-package com.example.accountmanager.Entity;
+package com.example.accountmanager.entity;
 
-public class EntityAccount {
+public class Account {
 
     public String website;
     public String timeStamp;
@@ -9,7 +9,7 @@ public class EntityAccount {
     public String notes;
     public String web_url;
 
-    public EntityAccount(String website, String timeStamp, String username, String password, String notes, String web_url) {
+    public Account(String website, String timeStamp, String username, String password, String notes, String web_url) {
         this.website = website;
         this.timeStamp = timeStamp;
         this.username = username;
@@ -18,7 +18,7 @@ public class EntityAccount {
         this.web_url = web_url;
     }
 
-    public EntityAccount() {
+    public Account() {
     }
 
     public String getWebsite() {

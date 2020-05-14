@@ -1,4 +1,4 @@
-package com.example.accountmanager.Entity;
+package com.example.accountmanager.entity;
 
 public class FalseLogger {
 

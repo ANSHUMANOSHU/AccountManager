@@ -1,12 +1,9 @@
 package com.example.accountmanager;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -24,12 +21,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.accountmanager.Entity.EntityAccount;
-import com.example.accountmanager.Entity.SqliteHelperAccounts;
+import com.example.accountmanager.entity.Account;
+import com.example.accountmanager.utils.SqliteHelperAccounts;
+import com.example.accountmanager.adapters.SavedAccountsAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Random;
 
 public class AddNewAccountActivity extends AppCompatActivity {
@@ -37,7 +34,7 @@ public class AddNewAccountActivity extends AppCompatActivity {
     EditText username, password, webSite, webUrl, notes;
     TextView stamp;
 
-    private ArrayList<EntityAccount> entityAccounts;
+    private ArrayList<Account> accounts;
     private SavedAccountsAdapter savedAccountsAdapter;
 
     // for Password Generation---------------------------------------------------
@@ -80,7 +77,7 @@ public class AddNewAccountActivity extends AppCompatActivity {
         stamp.setText(new Date().toString());
         notes.setText(" ");
 
-        entityAccounts = new ArrayList<>();
+        accounts = new ArrayList<>();
     }
 
     public void saveClicked(View view) {
@@ -90,7 +87,7 @@ public class AddNewAccountActivity extends AppCompatActivity {
             Toast.makeText(this, "Fields cannot be empty...", Toast.LENGTH_SHORT).show();
             return;
         }
-        EntityAccount account = new EntityAccount(webSite.getText().toString()
+        Account account = new Account(webSite.getText().toString()
                 ,stamp.getText().toString()
                 ,username.getText().toString()
                 ,password.getText().toString()

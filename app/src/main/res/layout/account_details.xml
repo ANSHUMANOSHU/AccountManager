@@ -82,7 +82,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="26"
                 android:gravity="center_vertical"
-                android:text="Address ( Url ) : "
+                android:text="URL     : "
                 android:textColor="@color/colorAccent"
                 android:typeface="monospace"
                 tools:ignore="HardcodedText" />
@@ -91,7 +91,7 @@
                 android:id="@+id/url"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="70"
+                android:layout_weight="66"
                 android:inputType="text"
                 android:textSize="16sp"
                 android:typeface="monospace"
@@ -100,7 +100,7 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="8"
                 android:contentDescription="@string/app_name"
                 android:onClick="browserClicked"
                 android:src="@drawable/browser" />

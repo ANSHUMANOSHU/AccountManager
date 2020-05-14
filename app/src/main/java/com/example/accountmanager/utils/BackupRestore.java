@@ -1,4 +1,4 @@
-package com.example.accountmanager.Entity;
+package com.example.accountmanager.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.accountmanager.entity.Account;
+import com.example.accountmanager.interfaces.OnBackupListener;
+import com.example.accountmanager.interfaces.OnRestoreListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -171,8 +174,8 @@ public class BackupRestore {
                         COL5 = cursor.getString(cursor.getColumnIndex(COLUMN_5));
                         COL6 = cursor.getString(cursor.getColumnIndex(COLUMN_6));
 
-                        EntityAccount entityAccount = new EntityAccount(COL2,COL1,COL4,COL5,COL6,COL3);
-                        accounts.insertAccountInfo(entityAccount);
+                        Account account = new Account(COL2,COL1,COL4,COL5,COL6,COL3);
+                        accounts.insertAccountInfo(account);
 
                     }
                     if (onRestoreListener != null) {

@@ -1,4 +1,4 @@
-package com.example.accountmanager;
+package com.example.accountmanager.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,16 +14,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.accountmanager.Entity.DataTransferHelper;
-import com.example.accountmanager.Entity.EntityAccount;
-import com.example.accountmanager.Entity.SqliteHelperAccounts;
+import com.example.accountmanager.AccountDetailsActivity;
+import com.example.accountmanager.R;
+import com.example.accountmanager.entity.DataTransferHelper;
+import com.example.accountmanager.entity.Account;
+import com.example.accountmanager.utils.SqliteHelperAccounts;
 
 import java.util.ArrayList;
 
 public class SavedAccountsAdapter extends RecyclerView.Adapter<SavedAccountsAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<EntityAccount> entities = new ArrayList<>();
+    private ArrayList<Account> entities = new ArrayList<>();
 
     public SavedAccountsAdapter(Context context) {
         this.context = context;
@@ -45,8 +47,8 @@ public class SavedAccountsAdapter extends RecyclerView.Adapter<SavedAccountsAdap
             @Override
             public void onClick(View v) {
                 //initialize transmission helper
-                DataTransferHelper.entityAccount = entities.get(position);
-                Intent intent = new Intent(context,AccountDetailsActivity.class);
+                DataTransferHelper.account = entities.get(position);
+                Intent intent = new Intent(context, AccountDetailsActivity.class);
                 context.startActivity(intent);
             }
         });
@@ -103,7 +105,7 @@ public class SavedAccountsAdapter extends RecyclerView.Adapter<SavedAccountsAdap
         }
     }
 
-    public void setEntities(ArrayList<EntityAccount> entities) {
+    public void setEntities(ArrayList<Account> entities) {
         this.entities = entities;
         notifyDataSetChanged();
     }

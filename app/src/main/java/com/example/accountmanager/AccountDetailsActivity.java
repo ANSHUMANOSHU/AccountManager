@@ -15,9 +15,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.accountmanager.Entity.DataTransferHelper;
-import com.example.accountmanager.Entity.EntityAccount;
-import com.example.accountmanager.Entity.SqliteHelperAccounts;
+import com.example.accountmanager.entity.DataTransferHelper;
+import com.example.accountmanager.entity.Account;
+import com.example.accountmanager.utils.SqliteHelperAccounts;
 
 import java.util.Objects;
 
@@ -44,23 +44,23 @@ public class AccountDetailsActivity extends AppCompatActivity {
         stamp = findViewById(R.id.timeStamp);
 
         //recieve data  and set to views
-        username.setText(DataTransferHelper.entityAccount.username);
-        password.setText(DataTransferHelper.entityAccount.password);
-        notes.setText(DataTransferHelper.entityAccount.notes);
-        webUrl.setText(DataTransferHelper.entityAccount.web_url);
-        websiteName.setText(DataTransferHelper.entityAccount.website);
-        stamp.setText(DataTransferHelper.entityAccount.timeStamp);
+        username.setText(DataTransferHelper.account.username);
+        password.setText(DataTransferHelper.account.password);
+        notes.setText(DataTransferHelper.account.notes);
+        webUrl.setText(DataTransferHelper.account.web_url);
+        websiteName.setText(DataTransferHelper.account.website);
+        stamp.setText(DataTransferHelper.account.timeStamp);
 
     }
 
     public void modifyClicked(View view) {
-        if(!DataTransferHelper.entityAccount.username.toLowerCase().equals(username.getText().toString().toLowerCase())
-                || !DataTransferHelper.entityAccount.password.equals(password.getText().toString().toLowerCase())
-                || !DataTransferHelper.entityAccount.web_url.equals(webUrl.getText().toString().toLowerCase())
-                || !DataTransferHelper.entityAccount.website.equals(websiteName.getText().toString().toLowerCase())
-                || !DataTransferHelper.entityAccount.notes.equals(notes.getText().toString().toLowerCase())){
+        if(!DataTransferHelper.account.username.toLowerCase().equals(username.getText().toString().toLowerCase())
+                || !DataTransferHelper.account.password.equals(password.getText().toString().toLowerCase())
+                || !DataTransferHelper.account.web_url.equals(webUrl.getText().toString().toLowerCase())
+                || !DataTransferHelper.account.website.equals(websiteName.getText().toString().toLowerCase())
+                || !DataTransferHelper.account.notes.equals(notes.getText().toString().toLowerCase())){
 
-            EntityAccount entityAccount = new EntityAccount(websiteName.getText().toString()
+            Account account = new Account(websiteName.getText().toString()
                     ,stamp.getText().toString()
                     ,username.getText().toString()
                     ,password.getText().toString()
@@ -68,7 +68,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
                     ,webUrl.getText().toString());
 
             SqliteHelperAccounts sqliteHelperAccounts = new SqliteHelperAccounts(this);
-            if (sqliteHelperAccounts.updateAccountInfo(entityAccount)){
+            if (sqliteHelperAccounts.updateAccountInfo(account)){
                 Toast.makeText(this, "Modification successful... ", Toast.LENGTH_SHORT).show();
             }
         }
@@ -89,7 +89,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 SqliteHelperAccounts sqliteHelperAccounts = new SqliteHelperAccounts(AccountDetailsActivity.this);
-                if (sqliteHelperAccounts.deleteAccountInfo(DataTransferHelper.entityAccount)){
+                if (sqliteHelperAccounts.deleteAccountInfo(DataTransferHelper.account)){
                     Toast.makeText(AccountDetailsActivity.this, "Deletion successful...", Toast.LENGTH_SHORT).show();
                     onBackPressed();
                 }

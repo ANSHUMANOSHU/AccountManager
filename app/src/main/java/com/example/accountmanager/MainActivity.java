@@ -14,7 +14,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -36,12 +35,13 @@ import com.androidhiddencamera.config.CameraFacing;
 import com.androidhiddencamera.config.CameraImageFormat;
 import com.androidhiddencamera.config.CameraResolution;
 import com.androidhiddencamera.config.CameraRotation;
-import com.example.accountmanager.Entity.BackupRestore;
-import com.example.accountmanager.Entity.EntityAccount;
-import com.example.accountmanager.Entity.OnBackupListener;
-import com.example.accountmanager.Entity.OnRestoreListener;
-import com.example.accountmanager.Entity.SqliteHelperAccounts;
-import com.example.accountmanager.Entity.SqliteHelperPassword;
+import com.example.accountmanager.utils.BackupRestore;
+import com.example.accountmanager.entity.Account;
+import com.example.accountmanager.interfaces.OnBackupListener;
+import com.example.accountmanager.interfaces.OnRestoreListener;
+import com.example.accountmanager.utils.SqliteHelperAccounts;
+import com.example.accountmanager.utils.SqliteHelperPassword;
+import com.example.accountmanager.adapters.SavedAccountsAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,10 +51,10 @@ public class MainActivity extends HiddenCameraActivity implements OnBackupListen
 
     private RecyclerView recyclerView;
     private SavedAccountsAdapter adapter;
-    private ArrayList<EntityAccount> entities;
-    private ArrayList<EntityAccount> temp = new ArrayList<>();
+    private ArrayList<Account> entities;
+    private ArrayList<Account> temp = new ArrayList<>();
     private CameraConfig cameraConfig;
-    Dialog dialog;
+    private Dialog dialog;
     public static boolean APP_OPENED = true;
     public static final String STORAGE_NAME = "AccountManagerPhotos";
     private SqliteHelperAccounts sqliteHelperAccounts;
@@ -238,13 +238,13 @@ public class MainActivity extends HiddenCameraActivity implements OnBackupListen
                     return false;
                 }
                 temp.clear();
-                for (EntityAccount entityAccount : entities) {
-                    if (entityAccount.website.toLowerCase().contains(newText.toLowerCase())
-                            || entityAccount.notes.toLowerCase().contains(newText.toLowerCase())
-                            || entityAccount.username.toLowerCase().contains(newText.toLowerCase())
-                            || entityAccount.web_url.toLowerCase().contains(newText.toLowerCase())) {
+                for (Account account : entities) {
+                    if (account.website.toLowerCase().contains(newText.toLowerCase())
+                            || account.notes.toLowerCase().contains(newText.toLowerCase())
+                            || account.username.toLowerCase().contains(newText.toLowerCase())
+                            || account.web_url.toLowerCase().contains(newText.toLowerCase())) {
 
-                        temp.add(entityAccount);
+                        temp.add(account);
                     }
                 }
 

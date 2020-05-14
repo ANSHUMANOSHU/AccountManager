@@ -1,4 +1,4 @@
-package com.example.accountmanager.Entity;
+package com.example.accountmanager.utils;
 
 import android.content.ContentValues;
 import android.content.Context;

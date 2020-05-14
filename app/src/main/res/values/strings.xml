@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Account Manager</string>
+    <string name="add_new_account">Add New Account</string>
+    <string name="saved_accounts_details">Saved Accounts Details :</string>
 </resources>
