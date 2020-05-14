@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    android:padding="3dp"
+    tools:context=".AccountDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="26"
+                android:text="Stamp   : \n"
+                android:textColor="@color/colorAccent"
+                android:typeface="monospace"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/timeStamp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70"
+                android:text="X X X  20/2/20  X X X "
+                android:typeface="monospace"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="26"
+                android:gravity="center_vertical"
+                android:text="Website :"
+                android:textColor="@color/colorAccent"
+                android:typeface="monospace"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/website"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70"
+                android:hint="website name"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                tools:ignore="Autofill,HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="26"
+                android:gravity="center_vertical"
+                android:text="Address ( Url ) : "
+                android:textColor="@color/colorAccent"
+                android:typeface="monospace"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/url"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                tools:ignore="Autofill,LabelFor,TextFields" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:contentDescription="@string/app_name"
+                android:onClick="browserClicked"
+                android:src="@drawable/browser" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="26"
+                android:gravity="center_vertical"
+                android:text="User    : "
+                android:textColor="@color/colorAccent"
+                android:typeface="monospace"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                tools:ignore="Autofill,LabelFor" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:contentDescription="@string/app_name"
+                android:onClick="copyIconUser"
+                android:src="@drawable/copy" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="26"
+                android:gravity="center_vertical"
+                android:text="Password: "
+                android:textColor="@color/colorAccent"
+                android:typeface="monospace"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                tools:ignore="Autofill,LabelFor,TextFields" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:contentDescription="@string/app_name"
+                android:onClick="copyIconPass"
+                android:src="@drawable/copy" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="26"
+                android:text="\nNotes   : "
+                android:textColor="@color/colorAccent"
+                android:typeface="monospace"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/notes"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70"
+                android:gravity="start"
+                android:hint="start here"
+                android:lines="5"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                tools:ignore="Autofill,HardcodedText,TextFields" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            android:weightSum="100">
+
+            <Button
+                android:id="@+id/modifiy"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="1dp"
+                android:layout_weight="50"
+                android:background="@color/colorPrimaryDark"
+                android:onClick="modifyClicked"
+                android:padding="1dp"
+                android:text="M O D I F Y"
+                android:textColor="#fff"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_weight="50"
+                android:background="@color/colorAccent"
+                android:onClick="deleteClicked"
+                android:text="D E L E T E"
+                android:textColor="#fff"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
