@@ -31,11 +31,14 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:textSize="16sp"
+            android:textStyle="bold"
             android:text="Anshuman Pandey"
             android:typeface="monospace"
             tools:ignore="HardcodedText" />
+
         <TextView
-            android:layout_marginBottom="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"

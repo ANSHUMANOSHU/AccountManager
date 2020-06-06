@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#213A9F</color>
+    <color name="colorPrimaryDark">#213A9F</color>
     <color name="colorAccent">#D81B60</color>
     <color name="textcolor_general">#FFFFFF</color>
     <color name="background_general">#ffffff</color>
+    <color name="colorModifyAdd">#27AD18</color>
+    <color name="colorDelete">#E63A2D</color>
+    <color name="colorHeading">#A118CA</color>
+    <color name="colorHeadBig">#000000</color>
+    <color name="backgroundPins">#31A728</color>
+    <color name="colorPinNew">#213A9F</color>
+    <color name="background_password_edittext">#dddddd</color>
 </resources>

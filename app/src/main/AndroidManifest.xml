@@ -15,10 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name=".LogAttemptsActivity"/>
-        <activity android:name=".AddNewAccountActivity" />
-        <activity android:name=".AccountDetailsActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.LogViewer"/>
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

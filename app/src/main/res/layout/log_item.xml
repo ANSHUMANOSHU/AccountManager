@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/logLayout"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@color/background_general"
+    android:orientation="vertical"
+    android:padding="1dp">
+
+    <ImageView
+        android:id="@+id/personImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="85"
+        android:contentDescription="@string/app_name"
+        android:paddingTop="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/capturedAtStamp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_weight="15"
+        android:background="@color/backgroundPins"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:padding="1dp"
+        android:singleLine="true"
+        android:text="Time Stamp"
+        android:textAlignment="center"
+        android:textColor="@color/textcolor_general"
+        android:textSize="14sp"
+        android:typeface="monospace"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>

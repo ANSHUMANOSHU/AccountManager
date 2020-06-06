@@ -6,7 +6,7 @@
     android:background="@color/background_general"
     android:orientation="vertical"
     android:padding="1dp"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <!--TOP LAYOUT-->
     <LinearLayout
@@ -24,17 +24,21 @@
             android:layout_weight="90"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:text="@string/saved_accounts_details"
+            android:text="Saved Account Details"
             android:textColor="@color/textcolor_general"
             android:textSize="16sp"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            tools:ignore="HardcodedText" />
 
         <ImageView
+            android:id="@+id/addAccount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="10"
-            android:contentDescription="@string/add_new_account"
-            android:src="@drawable/ic_add_circle_black_24dp" />
+            android:contentDescription="Add New Account"
+            android:src="@drawable/add"
+            tools:ignore="HardcodedText"
+            android:onClick="addAccountClicked"/>
 
     </LinearLayout>
 

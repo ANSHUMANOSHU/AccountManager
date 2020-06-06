@@ -8,31 +8,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.accountmanager.activity.MainActivity;
 import com.example.accountmanager.entity.Account;
-import com.example.accountmanager.interfaces.OnBackupListener;
-import com.example.accountmanager.interfaces.OnRestoreListener;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
-import java.util.Date;
 import java.util.HashMap;
 
 public class BackupRestore {
 
     private Context context;
-    private String BACKUP_PATH = Environment.getExternalStorageDirectory().getAbsolutePath()+"/AccountsBackup/"; //WITH / AT END
-    private String PACKAGE_NAME = "com.example.accountmanager";
-    private OnBackupListener onBackupListener;
-    private OnRestoreListener onRestoreListener;
-    private static final String TABLE_NAME = "accounts";
-    private static final String DATABASENAME = "Database";
-    private static final String COLUMN_1 = "stamp";
-    private static final String COLUMN_2 = "website";
-    private static final String COLUMN_3 = "weburl";
-    private static final String COLUMN_4 = "username";
-    private static final String COLUMN_5 = "password";
-    private static final String COLUMN_6 = "notes";
+    private String BACKUP_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Accounts/Backups";
+    private static final String PACKAGE_NAME = "com.example.accountmanager";
 
     public BackupRestore(Context context) {
         this.context = context;
@@ -48,7 +38,6 @@ public class BackupRestore {
             public void onClick(DialogInterface dialogInterface, int i) {
                 switch (i) {
                     case 0:
-                        //ASK BACKUP FILE NAME
                         startBackup();
                         break;
                     case 1:
@@ -67,22 +56,11 @@ public class BackupRestore {
         builder.show();
     }
 
-    public void setBackUpCompleteListener(OnBackupListener onBackupListener) {
-        this.onBackupListener = onBackupListener;
-    }
-
-    public void setRestoreCompleteListener(OnRestoreListener onRestoreListener) {
-        this.onRestoreListener = onRestoreListener;
-    }
-
     private void startRestore() {
-        //FETCH BACKUP FILE AND SHOW
         HashMap<String, String> map = fetAllFiles(BACKUP_PATH);
 
-        if (map == null) {
-            if (onRestoreListener != null) {
-                onRestoreListener.OnRestoreResponse("NO FILE FOUND");
-            }
+        if (map == null || map.size() == 0) {
+            Toast.makeText(context, "No Backup File Found", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -129,7 +107,7 @@ public class BackupRestore {
 
         //CREATE EDIT TEXT
         final EditText editText = new EditText(context);
-        editText.setText(getFormattedDate());
+        editText.setText(GeneralHelper.getFormattedDateTime());
 
         builder.setView(editText);
         builder.setCancelable(false);
@@ -158,54 +136,49 @@ public class BackupRestore {
     private void doRestore(String PATH) {
         SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(new File(PATH), null);
         if (database != null) {
-            String QUERY = String.format("Select * FROM %s", TABLE_NAME);
+            String QUERY = String.format("Select * FROM %s", SQLiteHelperAccounts.TABLE_NAME);
             Cursor cursor = database.rawQuery(QUERY, null);
             if (cursor != null) {
                 String COL1, COL2, COL3, COL4, COL5, COL6;
                 int NO = 0;
-                SqliteHelperAccounts accounts = new SqliteHelperAccounts(context);
+                SQLiteHelperAccounts accounts = new SQLiteHelperAccounts(context);
                 try {
                     while (cursor.moveToNext()) {
                         NO++;
-                        COL1 = cursor.getString(cursor.getColumnIndex(COLUMN_1));
-                        COL2 = cursor.getString(cursor.getColumnIndex(COLUMN_2));
-                        COL3 = cursor.getString(cursor.getColumnIndex(COLUMN_3));
-                        COL4 = cursor.getString(cursor.getColumnIndex(COLUMN_4));
-                        COL5 = cursor.getString(cursor.getColumnIndex(COLUMN_5));
-                        COL6 = cursor.getString(cursor.getColumnIndex(COLUMN_6));
+                        COL1 = cursor.getString(cursor.getColumnIndex(SQLiteHelperAccounts.COLUMN_1));
+                        COL2 = cursor.getString(cursor.getColumnIndex(SQLiteHelperAccounts.COLUMN_2));
+                        COL3 = cursor.getString(cursor.getColumnIndex(SQLiteHelperAccounts.COLUMN_3));
+                        COL4 = cursor.getString(cursor.getColumnIndex(SQLiteHelperAccounts.COLUMN_4));
+                        COL5 = cursor.getString(cursor.getColumnIndex(SQLiteHelperAccounts.COLUMN_5));
+                        COL6 = cursor.getString(cursor.getColumnIndex(SQLiteHelperAccounts.COLUMN_6));
 
-                        Account account = new Account(COL2,COL1,COL4,COL5,COL6,COL3);
-                        accounts.insertAccountInfo(account);
+                        Account account = new Account(COL2, COL1, COL4, COL5, COL6, COL3);
+                        accounts.insert(account);
 
                     }
-                    if (onRestoreListener != null) {
-                        onRestoreListener.OnRestoreResponse("Successfully Imported " + NO + " Entries");
-                    }
+                    ((MainActivity) context).fetchAllSavedAccounts();
+                    Toast.makeText(context, "Successfully Imported : " + NO + " Entries", Toast.LENGTH_SHORT).show();
                 } catch (Exception ex) {
-                    if (onRestoreListener != null) {
-                        onRestoreListener.OnRestoreResponse("Invalid Database File");
-                    }
+                    Toast.makeText(context, "Invalid Database File", Toast.LENGTH_SHORT).show();
                 } finally {
                     cursor.close();
                 }
             } else {
-                if (onRestoreListener != null) {
-                    onRestoreListener.OnRestoreResponse("Invalid Database File");
-                }
+                Toast.makeText(context, "Invalid Database File", Toast.LENGTH_SHORT).show();
             }
-        }
-        else {
-            if (onRestoreListener != null) {
-                onRestoreListener.OnRestoreResponse("Invalid Database File");
-            }
+        } else {
+            Toast.makeText(context, "Permission Denied for Reading Backup File", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void doBackup(String filename) {
         try {
-            String currentDBPath = "/data/data/" + PACKAGE_NAME + "/databases/" + DATABASENAME;
+            String currentDBPath = "/data/data/" + PACKAGE_NAME + "/databases/" + SQLiteHelperAccounts.DB_NAME_ACCOUNTS;
             File currentDB = new File(currentDBPath);
-            BACKUP_PATH += filename + ".db";
+            if (!new File(BACKUP_PATH).exists()) {
+                new File(BACKUP_PATH).mkdirs();
+            }
+            BACKUP_PATH += "/" + filename + ".db";
             File backupDB = new File(BACKUP_PATH);
 
             if (currentDB.exists()) {
@@ -215,28 +188,14 @@ public class BackupRestore {
                 src.close();
                 dst.close();
 
-                if (onBackupListener != null) {
-                    onBackupListener.OnBackupResponse("Backup Successful\nLocation : " + BACKUP_PATH);
-                }
+                Toast.makeText(context, "Backup Successful\nLocation : " + BACKUP_PATH, Toast.LENGTH_SHORT).show();
 
             } else {
-
-                if (onBackupListener != null) {
-                    onBackupListener.OnBackupResponse("No Database File Found");
-                }
-
+                Toast.makeText(context, "No Database File Found", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            if (onBackupListener != null) {
-                onBackupListener.OnBackupResponse("Error : " + e);
-            }
+            Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private String getFormattedDate() {
-        String[] date = new Date().toString().split(" ");
-        date[0] = date[2] + "" + date[1] + "" + date[5] + "_" + date[3];
-        return date[0];
     }
 
     private HashMap<String, String> fetAllFiles(String backup_path) {
